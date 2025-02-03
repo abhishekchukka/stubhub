@@ -1,19 +1,22 @@
+// app/page.tsx
 import { Header } from "@/components/header";
 import { Search } from "@/components/search";
 import { Hero } from "@/components/hero";
 import { EventCard } from "@/components/event-card";
 import { Button } from "@/components/ui/button";
 import { getEvents, getCategories } from "@/lib/api";
+import type { Event, Category } from "@/types/event"; // Ensure to import types
 
 export default async function Home() {
+  // Fetch data asynchronously for events and categories
   const [events, categories] = await Promise.all([
     getEvents().catch((error) => {
       console.error("Failed to fetch events:", error);
-      return;
+      return []; // Return an empty array if error occurs
     }),
     getCategories().catch((error) => {
       console.error("Failed to fetch categories:", error);
-      return;
+      return []; // Return an empty array if error occurs
     }),
   ]);
 
@@ -33,7 +36,7 @@ export default async function Home() {
               <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
                 <div className="flex gap-2 min-w-max">
                   {(Array.isArray(categories) ? categories : []).map(
-                    (category) => (
+                    (category: Category) => (
                       <Button
                         key={category.id}
                         variant="outline"
@@ -49,7 +52,7 @@ export default async function Home() {
 
             {events.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-                {events.map((event, index) => (
+                {events.map((event: Event, index: number) => (
                   <EventCard key={event.id} event={event} rank={index + 1} />
                 ))}
               </div>
