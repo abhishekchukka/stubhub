@@ -4,7 +4,6 @@ import { Hero } from "@/components/hero";
 import { EventCard } from "@/components/event-card";
 import { Button } from "@/components/ui/button";
 import { getEvents, getCategories } from "@/lib/api";
-// ✅ Import the correct type
 
 export default async function Home() {
   const [events, categories] = await Promise.all([
