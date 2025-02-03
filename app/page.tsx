@@ -9,7 +9,7 @@ export default async function Home() {
   const [events, categories] = await Promise.all([
     getEvents().catch((error) => {
       console.error("Failed to fetch events:", error);
-      return [];
+      return;
     }),
     getCategories().catch((error) => {
       console.error("Failed to fetch categories:", error);
