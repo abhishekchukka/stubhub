@@ -4,10 +4,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "*", // Allows all domains
+        hostname: "images.unsplash.com",
+        pathname: "/**",
       },
     ],
-    domains: ["*"], // Alternative way to allow all domains (some Next.js versions require specifying exact domains)
   },
 };
 
